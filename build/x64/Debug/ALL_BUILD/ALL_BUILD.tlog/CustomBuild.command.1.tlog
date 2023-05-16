@@ -1,0 +1,10 @@
+^C:\USERS\RAVITEJA\DESKTOP\FACEDETECTION\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Raviteja/Desktop/FaceDetection -BC:/Users/Raviteja/Desktop/FaceDetection/build --check-stamp-file C:/Users/Raviteja/Desktop/FaceDetection/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

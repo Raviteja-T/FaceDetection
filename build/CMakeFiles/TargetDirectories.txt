@@ -1,0 +1,4 @@
+C:/Users/Raviteja/Desktop/FaceDetection/build/CMakeFiles/FACEDETECTION.dir
+C:/Users/Raviteja/Desktop/FaceDetection/build/CMakeFiles/PACKAGE.dir
+C:/Users/Raviteja/Desktop/FaceDetection/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Raviteja/Desktop/FaceDetection/build/CMakeFiles/ZERO_CHECK.dir

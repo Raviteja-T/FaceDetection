@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Raviteja\Desktop\FaceDetection\build\CMakeFiles\355f189eac3cf76f835d24b9adc6cfb9\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{FD9EA203-82F2-33D6-BE10-FBA669774312}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
