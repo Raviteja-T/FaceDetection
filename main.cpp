@@ -1,20 +1,72 @@
-#include <opencv2/opencv.hpp>
+#include <opencv2/objdetect.hpp>
+#include <opencv2/videoio.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 
-int main(int argc, char** argv)
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+using namespace cv;
+
+// Function to detect faces in an image
+void detectAndDisplay(Mat frame);
+
+// Pre-trained face detection model
+String face_cascade_name = "C:/Users/Raviteja/Desktop/FaceDetection/haarcascade_frontalface_alt.xml";
+CascadeClassifier face_cascade;
+
+int main(int argc, const char** argv)
 {
-    cv::VideoCapture cap(0); // open the default camera
-    if(!cap.isOpened())  // check if we succeeded
+    // Load the cascade classifier
+    if (!face_cascade.load(face_cascade_name)) {
+        printf("--(!)Error loading face cascade\n");
         return -1;
+    };
 
-    cv::namedWindow("Camera",1);
-    for(;;)
-    {
-        cv::Mat frame;
-        cap >> frame; // get a new frame from camera
-        cv::imshow("Camera", frame);
-        if(cv::waitKey(30) >= 0) break;
+    // Open the default video camera
+    VideoCapture capture(0);
+    if (!capture.isOpened()) {
+        printf("--(!)Error opening video capture\n");
+        return -1;
     }
 
-    // the camera will be deinitialized automatically in VideoCapture destructor
+    Mat frame;
+    while (capture.read(frame)) {
+        if (frame.empty()) {
+            printf(" --(!) No captured frame -- Break!");
+            break;
+        }
+
+        // Apply the classifier to the frame
+        detectAndDisplay(frame);
+
+        if (waitKey(10) == 27) {
+            break; // escape
+        }
+    }
     return 0;
+}
+
+void detectAndDisplay(Mat frame)
+{
+    std::vector<Rect> faces;
+    Mat frame_gray;
+
+    // Convert to gray scale
+    cvtColor(frame, frame_gray, COLOR_BGR2GRAY);
+    equalizeHist(frame_gray, frame_gray);
+
+    // Detect faces
+    face_cascade.detectMultiScale(frame_gray, faces);
+
+    for (size_t i = 0; i < faces.size(); i++) {
+        Point center(faces[i].x + faces[i].width / 2, faces[i].y + faces[i].height / 2);
+        ellipse(frame, center, Size(faces[i].width / 2, faces[i].height / 2), 0, 0, 360, Scalar(255, 0, 255), 4);
+
+        Mat faceROI = frame_gray(faces[i]);
+    }
+
+    // Show the result
+    imshow("Capture - Face detection", frame);
 }
